@@ -20,6 +20,7 @@ class GatoWidget extends StatelessWidget {
                 
                 setState((){
                    deslocamento = 5;
+                   ciclos = 0;
                 });
                 AssetsAudioPlayer.newPlayer().open(
                     Audio("sons/miau.mp3"),
@@ -37,14 +38,17 @@ class GatoWidget extends StatelessWidget {
                 duration: Duration(milliseconds: 10),
                 curve: Curves.linear,
                 child: gatoFade(), onEnd: () {
-                  if (ciclos<10) {
+                  if (ciclos<10 && deslocamento!=0) {
                     setState((){
                      deslocamento = deslocamento*-1;
                      ciclos++;
                     });
                   } else {
-                    deslocamento = 0;
-                    ciclos = 0;
+                    setState((){
+                       deslocamento = 0;
+                       ciclos = 0;
+                    });
+                    
                   }}
                 ,)]),
         ),
